@@ -22,10 +22,25 @@ $(function(){
          .end().appendTo('.fadein');}, 
       7000);
 });
+function startTime() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+    document.getElementById('clock').innerHTML =
+    h + ":" + m + ":" + s;
+    var t = setTimeout(startTime, 500);
+}
+function checkTime(i) {
+    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+}
 </script>
 <TITLE>Homepage</TITLE>
 </head>
-<body>
+<body onload="startTime()">
 <div class="fadein fit center">
   <img src="/images/img100.jpg" />
   <img src="/images/img101.png" />
@@ -33,6 +48,7 @@ $(function(){
   <img src="/images/img103.png" />
   <img src="/images/img104.jpg" />
 </div>
+<h1 style="font-family:Geneva, Arial, Helvetica, sans-serif;"><div id="clock" class="center"></div></h1>
 <audio controls autoplay class="music">
     <source src="/music/San_Holo_Shrooms.mp3" type="audio/mpeg" />
     <!-- <a href="/music/San_Holo_Shrooms.mp3">San Holo - Shrooms</a> -->
