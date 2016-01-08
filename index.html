@@ -2,15 +2,34 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="/css/style.css">
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+<script type="text/javascript" language="JavaScript">
+  
+  function set_body_height() { // set body height = window height
+    $('body').height($(window).height());
+  }
+  $(document).ready(function() {
+    $(window).bind('resize', set_body_height);
+    set_body_height();
+  });
+$(function(){
+    $('.fadein img:gt(0)').hide();
+    setInterval(function(){
+      $('.fadein :first-child').fadeOut(2000)
+         .next('img').fadeIn(2000)
+         .end().appendTo('.fadein');}, 
+      7000);
+});
+</script>
 <TITLE>Homepage</TITLE>
 </head>
 <body>
-<div id="cf4">
-  <img class="bottom" src="/images/img100.jpg" />
-  <img class="top" src="/images/img101.jpg" />
-  <img class="bottom" src="/images/img102.jpg" />
-  <img class="bottom" src="/images/img103.jpg" />
-  <img class="bottom" src="/images/img104.jpg" />
+<div class="fadein fit center">
+  <img src="/images/img100.jpg" />
+  <img src="/images/img101.jpg" />
+  <img src="/images/img102.jpg" />
+  <img src="/images/img103.jpg" />
+  <img src="/images/img104.jpg" />
 </div>
 </body>
 </html>
