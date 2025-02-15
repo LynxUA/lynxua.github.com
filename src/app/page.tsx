@@ -3,6 +3,7 @@ import { defineQuery } from 'next-sanity';
 import { sanityFetch } from '../../sanity/lib/live';
 import './home.scss';
 import {FacebookFilled, LinkedinFilled, MailFilled, TwitterSquareFilled} from "@ant-design/icons";
+import { Post } from '../../sanity/sanity.types';
 
 const SOCIAL_LINKS = [
   {
@@ -55,14 +56,14 @@ export default async function Home() {
 
         <main className="main-content">
           <div className="posts-grid">
-            {posts.map((post: any) => (
+            {posts.map((post: Post) => (
                 <article key={post._id} className="post-card">
                   <div className="post-card__content">
                     <h2 className="post-card__title">{post.title}</h2>
-                    <p className="post-card__excerpt">{post.excerpt}</p>
+                    {/* <p className="post-card__excerpt">{post.excerpt}</p> */}
                     <div className="post-card__footer">
                       <time className="post-card__date">
-                        {new Date(post.publishedAt).toLocaleDateString()}
+                        {post.publishedAt && new Date(post.publishedAt).toLocaleDateString()}
                       </time>
                       <a href={`/blog/${post.slug}`} className="post-card__link">
                         Read more
