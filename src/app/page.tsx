@@ -1,95 +1,87 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+// app/page.tsx
+import { defineQuery } from 'next-sanity';
+import { sanityFetch } from '../../sanity/lib/live';
+import './home.scss';
+import {FacebookFilled, LinkedinFilled, MailFilled, TwitterSquareFilled} from "@ant-design/icons";
 
-export default function Home() {
+const SOCIAL_LINKS = [
+  {
+    icon: FacebookFilled,
+    href: 'https://github.com/yourusername',
+    label: 'GitHub'
+  },
+  {
+    icon: TwitterSquareFilled,
+    href: 'https://twitter.com/yourusername',
+    label: 'Twitter'
+  },
+  {
+    icon: LinkedinFilled,
+    href: 'https://linkedin.com/in/yourusername',
+    label: 'LinkedIn'
+  },
+  {
+    icon: MailFilled,
+    href: 'mailto:your@email.com',
+    label: 'Email'
+  }
+];
+
+const POSTS_QUERY = defineQuery(`*[_type == "post" && defined(slug.current)][0...$limit]`)
+
+export default async function Home() {
+  const posts = await getBlogPosts();
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+      <div className="page-container">
+        <header className="header">
+          <div className="header__container">
+            <div className="header__social-links">
+              {SOCIAL_LINKS.map((link) => (
+                  <a
+                      key={link.label}
+                      href={link.href}
+                      className="header__social-link"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                  >
+                    <link.icon />
+                    <span className="sr-only">{link.label}</span>
+                  </a>
+              ))}
+            </div>
+          </div>
+        </header>
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        <main className="main-content">
+          <div className="posts-grid">
+            {posts.map((post: any) => (
+                <article key={post._id} className="post-card">
+                  <div className="post-card__content">
+                    <h2 className="post-card__title">{post.title}</h2>
+                    <p className="post-card__excerpt">{post.excerpt}</p>
+                    <div className="post-card__footer">
+                      <time className="post-card__date">
+                        {new Date(post.publishedAt).toLocaleDateString()}
+                      </time>
+                      <a href={`/blog/${post.slug}`} className="post-card__link">
+                        Read more
+                      </a>
+                    </div>
+                  </div>
+                </article>
+            ))}
+          </div>
+        </main>
+      </div>
   );
+}
+
+async function getBlogPosts() {
+  // Mock data for demonstration purposes
+  const {data: posts} = await sanityFetch({
+    query: POSTS_QUERY,
+    params: {limit: 10},
+  })
+  return posts
 }

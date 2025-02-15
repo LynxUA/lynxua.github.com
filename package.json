@@ -4,16 +4,27 @@
   "private": true,
   "homepage": "https://lynxua.github.io",
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "gh-pages -d out"
+    "deploy": "gh-pages -d out",
+    "studio": "sanity dev"
   },
   "dependencies": {
+    "@ant-design/nextjs-registry": "^1.0.2",
+    "@ant-design/v5-patch-for-react-19": "^1.0.3",
+    "@sanity/icons": "^3.6.0",
+    "@sanity/image-url": "^1.1.0",
+    "@sanity/vision": "^3.75.0",
+    "@svgr/webpack": "^8.1.0",
+    "antd": "^5.23.4",
     "next": "15.1.6",
+    "next-sanity": "^9.8.57",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "sanity": "^3.75.0",
+    "styled-components": "^6.1.15"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -23,6 +34,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.1.6",
     "gh-pages": "^6.3.0",
+    "sass": "^1.84.0",
     "typescript": "^5"
   }
 }
