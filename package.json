@@ -17,14 +17,14 @@
     "@ant-design/v5-patch-for-react-19": "^1.0.3",
     "@sanity/icons": "^3.6.0",
     "@sanity/image-url": "^1.1.0",
-    "@sanity/vision": "^3.75.0",
+    "@sanity/vision": "^3.75.1",
     "@svgr/webpack": "^8.1.0",
     "antd": "^5.23.4",
     "next": "15.1.6",
     "next-sanity": "^9.8.57",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "sanity": "^3.75.0",
+    "sanity": "^3.75.1",
     "styled-components": "^6.1.15"
   },
   "devDependencies": {

@@ -1,9 +1,10 @@
 // app/page.tsx
-import { defineQuery } from 'next-sanity';
-import { sanityFetch } from '../../sanity/lib/live';
 import './home.scss';
 import {FacebookFilled, LinkedinFilled, MailFilled, TwitterSquareFilled} from "@ant-design/icons";
 import { Post } from '../../sanity/sanity.types';
+import { getBlogPosts } from './sanity-queries';
+
+export const dynamic = 'force-static'
 
 const SOCIAL_LINKS = [
   {
@@ -28,7 +29,9 @@ const SOCIAL_LINKS = [
   }
 ];
 
-const POSTS_QUERY = defineQuery(`*[_type == "post" && defined(slug.current)][0...$limit]`)
+export async function generateStaticParams() {
+  return [{}]; // Empty object for the index page
+}
 
 export default async function Home() {
   const posts = await getBlogPosts();
@@ -65,7 +68,7 @@ export default async function Home() {
                       <time className="post-card__date">
                         {post.publishedAt && new Date(post.publishedAt).toLocaleDateString()}
                       </time>
-                      <a href={`/blog/${post.slug}`} className="post-card__link">
+                      <a href={`/blog/${post.slug?.current}`} className="post-card__link">
                         Read more
                       </a>
                     </div>
@@ -76,13 +79,4 @@ export default async function Home() {
         </main>
       </div>
   );
-}
-
-async function getBlogPosts() {
-  // Mock data for demonstration purposes
-  const {data: posts} = await sanityFetch({
-    query: POSTS_QUERY,
-    params: {limit: 10},
-  })
-  return posts
 }
