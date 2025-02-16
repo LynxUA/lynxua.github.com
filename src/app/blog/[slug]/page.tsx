@@ -1,8 +1,6 @@
 // app/blog/[slug]/page.tsx
-import { defineQuery } from "next-sanity";
 import { Post } from "../../../../sanity/sanity.types";
-import { getBlogPosts } from "@/app/sanity-queries";
-import { sanityFetch } from "../../../../sanity/lib/live";
+import {getBlogPost, getBlogPosts} from "@/app/sanity-queries";
 
 export const dynamic = "force-static";
 export const revalidate = 3600;
@@ -20,10 +18,7 @@ type Props = {
 }
 // Fetch data for each static page
 export default async function BlogPost({params}: Props) {
-  const {data: post} = await sanityFetch({
-    query: defineQuery(`*[_type == "post" && slug.current == $slug][0]`),
-    params,
-  });
+  const post = await getBlogPost((await params).slug)
 
   if (!post) {
     return <div>Post not found</div>;

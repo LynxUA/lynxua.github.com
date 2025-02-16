@@ -5,7 +5,7 @@ import { AntdRegistry } from "@ant-design/nextjs-registry";
 import '@ant-design/v5-patch-for-react-19';
 import { ConfigProvider } from "antd";
 import { theme } from "../lib/Theme";
-import { SanityLive } from "../../sanity/lib/live";
+// import { SanityLive } from "../../sanity/lib/live";
 // import { VisualEditing } from 'next-sanity'
 
 const geistSans = Geist({
@@ -34,7 +34,7 @@ export default function RootLayout({
         <AntdRegistry>
           <ConfigProvider theme={theme}>
             {children}
-            <SanityLive />
+            {/*<SanityLive />*/}
             {/* {(await draftMode()).isEnabled && <VisualEditing />} */}
           </ConfigProvider>
         </AntdRegistry>
