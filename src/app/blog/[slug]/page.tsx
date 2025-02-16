@@ -15,15 +15,14 @@ export async function generateStaticParams() {
   }));
 }
 
+type Props = {
+  params: Promise<{slug: string}>
+}
 // Fetch data for each static page
-export default async function BlogPost({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export default async function BlogPost({params}: Props) {
   const {data: post} = await sanityFetch({
     query: defineQuery(`*[_type == "post" && slug.current == $slug][0]`),
-    params: { slug: params.slug },
+    params,
   });
 
   if (!post) {
