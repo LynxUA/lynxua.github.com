@@ -10,7 +10,8 @@
     "lint": "next lint",
     "deploy": "gh-pages -d out",
     "studio": "sanity dev",
-    "schema-extract": "sanity schema extract"
+    "schema-extract": "sanity schema extract",
+    "generate-schema": "sanity typegen generate"
   },
   "dependencies": {
     "@ant-design/nextjs-registry": "^1.0.2",
@@ -24,7 +25,9 @@
     "next-sanity": "^9.8.57",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-markdown": "^10.0.0",
     "sanity": "^3.75.1",
+    "sanity-plugin-markdown": "^5.0.0",
     "styled-components": "^6.1.15"
   },
   "devDependencies": {

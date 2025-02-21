@@ -1,6 +1,7 @@
 // app/blog/[slug]/page.tsx
 import { Post } from "../../../../sanity/sanity.types";
 import {getBlogPost, getBlogPosts} from "@/app/sanity-queries";
+import Markdown from "react-markdown";
 
 export const dynamic = "force-static";
 export const revalidate = 3600;
@@ -27,7 +28,7 @@ export default async function BlogPost({params}: Props) {
   return (
     <article>
       <h1>{post.title}</h1>
-      {/* Rest of your blog post component */}
+      <Markdown>{post.body}</Markdown>
     </article>
   );
 }
