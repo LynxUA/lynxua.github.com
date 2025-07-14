@@ -2,11 +2,15 @@
 
 import React, { useState, useEffect } from 'react';
 import './typewriter-profile.scss';
+import { Doto } from 'next/font/google';
 
 interface TypewriterProfileProps {
   avatar: string;
   texts: string[];
 }
+const doto = Doto({
+  subsets: ['latin'],
+})
 
 const TypewriterProfile: React.FC<TypewriterProfileProps> = ({ avatar, texts }) => {
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
@@ -60,7 +64,7 @@ const TypewriterProfile: React.FC<TypewriterProfileProps> = ({ avatar, texts }) 
       <div className="typewriter-profile__avatar" style={{ backgroundImage: `url('${avatar}')` }} />
       
       <div className="typewriter-profile__content">
-        <div className="typewriter-profile__text">
+        <div className={"typewriter-profile__text " + doto.className}>
           <span className="typewriter-text">{currentText}</span>
           <span className="typewriter-cursor">|</span>
         </div>
