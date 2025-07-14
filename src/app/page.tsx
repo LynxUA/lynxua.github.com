@@ -1,7 +1,8 @@
 // app/page.tsx
 import './home.scss';
-import { Post } from '../../sanity/sanity.types';
 import { getBlogPosts } from './sanity-queries';
+import PostCard from './PostCard';
+import TypewriterProfile from './TypewriterProfile';
 
 export const dynamic = 'force-static'
 
@@ -12,24 +13,36 @@ export async function generateStaticParams() {
 export default async function Home() {
   const posts = await getBlogPosts();
 
+  // Typewriter texts to cycle through
+  const typewriterTexts = [
+    'Denys Burlakov',
+    'Kyiv, Ukraine',
+    'React & Golang Lead',
+    'OSS/BSS configuration forefront'
+  ];
+
   return (
-          <div className="posts-grid">
-            {posts.map((post: Post) => (
-                <article key={post._id} className="post-card">
-                  <div className="post-card__content">
-                    <h2 className="post-card__title">{post.title}</h2>
-                    {/* <p className="post-card__excerpt">{post.excerpt}</p> */}
-                    <div className="post-card__footer">
-                      <time className="post-card__date">
-                        {post.publishedAt && new Date(post.publishedAt).toLocaleDateString()}
-                      </time>
-                      <a href={`/blog/${post.slug?.current}`} className="post-card__link">
-                        Read more
-                      </a>
-                    </div>
-                  </div>
-                </article>
-            ))}
-          </div>
+    <div className="content-container">
+      <TypewriterProfile 
+        avatar="/avatar.jpeg"
+        texts={typewriterTexts}
+      />
+      <section>
+        <h2 className="section-title">Featured Posts</h2>
+        <div className="posts-grid featured">
+          {posts.slice(0, 4).map((post) => (
+            <PostCard key={post._id} post={post} featured />
+          ))}
+        </div>
+      </section>
+      <section>
+        <h2 className="section-title">All Posts</h2>
+        <div className="posts-grid all">
+          {posts.map((post) => (
+            <PostCard key={post._id} post={post} showFooter />
+          ))}
+        </div>
+      </section>
+    </div>
   );
 }

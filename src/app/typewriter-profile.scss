@@ -1,0 +1,153 @@
+// typewriter-profile.scss
+.typewriter-profile {
+  display: flex;
+  align-items: flex-start;
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+  max-width: 800px;
+  margin-right: auto;
+  gap: 2rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  &__avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      width: 100px;
+      height: 100px;
+    }
+
+    @media (max-width: 480px) {
+      width: 80px;
+      height: 80px;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 1.5rem;
+
+    @media (max-width: 768px) {
+      align-items: center;
+    }
+  }
+
+  &__text {
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: 600;
+    color: #2c3e50;
+    font-family: "Doto", -apple-system, BlinkMacSystemFont, sans-serif;
+
+    @media (max-width: 768px) {
+      font-size: 1.5rem;
+      min-height: 45px;
+      justify-content: center;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 1.2rem;
+      min-height: 36px;
+    }
+  }
+
+  &__social {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+    @media (max-width: 768px) {
+      justify-content: center;
+    }
+  }
+
+  &__social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #f8f9fa;
+    color: #6c757d;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid #e9ecef;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    &--linkedin {
+      &:hover {
+        background-color: #0077b5;
+        color: white;
+        border-color: #0077b5;
+      }
+    }
+
+    &--twitter {
+      &:hover {
+        background-color: #000000;
+        color: white;
+        border-color: #000000;
+      }
+    }
+
+    &--instagram {
+      &:hover {
+        background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        color: white;
+        border-color: transparent;
+      }
+    }
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+.typewriter-text {
+  white-space: nowrap;
+  color: #2c3e50;
+}
+
+.typewriter-cursor {
+  color: #393939;
+  animation: blink 1s infinite;
+  font-weight: normal;
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}

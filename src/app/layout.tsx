@@ -6,83 +6,40 @@ import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { ConfigProvider } from "antd";
 import { theme } from "../lib/Theme";
 import './home.scss';
-import { FacebookFilled, LinkedinFilled, MailFilled, TwitterSquareFilled } from "@ant-design/icons";
+import Link from 'next/link';
+import FloatingHomeButton from './FloatingHomeButton';
 // import { SanityLive } from "../../sanity/lib/live";
 // import { VisualEditing } from 'next-sanity'
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  title: "Denys's homepage",
-  description: "Привіт, світе!",
+  title: "Сторінка Дениса",
 };
 
-const SOCIAL_LINKS = [
-  {
-    icon: FacebookFilled,
-    href: 'https://github.com/yourusername',
-    label: 'GitHub'
-  },
-  {
-    icon: TwitterSquareFilled,
-    href: 'https://twitter.com/yourusername',
-    label: 'Twitter'
-  },
-  {
-    icon: LinkedinFilled,
-    href: 'https://linkedin.com/in/yourusername',
-    label: 'LinkedIn'
-  },
-  {
-    icon: MailFilled,
-    href: 'mailto:your@email.com',
-    label: 'Email'
-  }
-];
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="uk">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com"/>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous"/>
+        <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet"/>
+      </head>
+      <body className="root">
         <AntdRegistry>
           <ConfigProvider theme={theme}>
-            <div className="page-container">
+            <div className="layout-container">
               <header className="header">
-                <div className="header__container">
-                  <div className="header__social-links">
-                    {SOCIAL_LINKS.map((link) => (
-                      <a
-                        key={link.label}
-                        href={link.href}
-                        className="header__social-link"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <link.icon />
-                        <span className="sr-only">{link.label}</span>
-                      </a>
-                    ))}
-                  </div>
+                <div className="header__left">
+                  <Link href="/" className="header__home-link">
+                    <h2 className="header__title" style={{ fontWeight: 700, fontSize: 22, marginLeft: 12, color: '#2c3e50', fontFamily: 'Doto, -apple-system, BlinkMacSystemFont, sans-serif' }}>lynx.kyiv.ua</h2>
+                  </Link>
                 </div>
               </header>
-
               <main className="main-content">
                 {children}
                 {/*<SanityLive />*/}
                 {/* {(await draftMode()).isEnabled && <VisualEditing />} */}
               </main>
+              <FloatingHomeButton />
             </div>
           </ConfigProvider>
         </AntdRegistry>

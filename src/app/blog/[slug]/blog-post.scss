@@ -1,0 +1,337 @@
+// Blog post styles
+.blog-post-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+
+  @media (max-width: 768px) {
+    padding: 1rem 0.5rem;
+  }
+}
+
+.blog-post {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+
+  @media (max-width: 768px) {
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  &__hero {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+
+    @media (max-width: 768px) {
+      height: 250px;
+    }
+  }
+
+  &__hero-image {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  &__header {
+    padding: 3rem;
+    border-bottom: 1px solid #f3f4f6;
+
+    @media (max-width: 768px) {
+      padding: 2rem 1.5rem;
+    }
+  }
+
+  &__categories {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  &__category {
+    background: #2563eb;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  &__title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #111827;
+    line-height: 1.2;
+    margin: 0 0 2rem 0;
+
+    @media (max-width: 768px) {
+      font-size: 2rem;
+      margin: 0 0 1.5rem 0;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 1.75rem;
+    }
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__author-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  &__author-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__author-name {
+    font-weight: 600;
+    color: #111827;
+    font-size: 1rem;
+  }
+
+  &__meta-details,
+  &__meta-simple {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.25rem;
+
+    @media (max-width: 480px) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+  }
+
+  &__date {
+    color: #6b7280;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  &__reading-time {
+    color: #6b7280;
+    font-size: 0.9rem;
+    font-weight: 500;
+
+    &::before {
+      content: "•";
+      margin-right: 0.5rem;
+
+      @media (max-width: 480px) {
+        display: none;
+      }
+    }
+  }
+
+  &__content {
+    padding: 3rem;
+    line-height: 1.7;
+    color: #374151;
+
+    @media (max-width: 768px) {
+      padding: 2rem 1.5rem;
+    }
+
+    // Markdown content styling
+    &-h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #111827;
+      margin: 3rem 0 1.5rem 0;
+      line-height: 1.3;
+      border-bottom: 2px solid #e5e7eb;
+      padding-bottom: 0.5rem;
+
+      @media (max-width: 768px) {
+        font-size: 1.75rem;
+        margin: 2rem 0 1rem 0;
+      }
+    }
+
+    &-h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #111827;
+      margin: 2.5rem 0 1rem 0;
+      line-height: 1.4;
+
+      @media (max-width: 768px) {
+        font-size: 1.35rem;
+        margin: 2rem 0 0.75rem 0;
+      }
+    }
+
+    &-h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #111827;
+      margin: 2rem 0 0.75rem 0;
+      line-height: 1.4;
+
+      @media (max-width: 768px) {
+        font-size: 1.15rem;
+        margin: 1.5rem 0 0.5rem 0;
+      }
+    }
+
+    &-p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      margin: 0 0 1.5rem 0;
+      color: #374151;
+
+      @media (max-width: 768px) {
+        font-size: 1rem;
+        margin: 0 0 1.25rem 0;
+      }
+
+      // Special styling for emojis at the start
+      &:has(::first-child:is(span):contains('🧠'), ::first-child:is(span):contains('😴'), ::first-child:is(span):contains('🧘‍♀️'), ::first-child:is(span):contains('🫂'), ::first-child:is(span):contains('📵')) {
+        font-weight: 600;
+        color: #111827;
+        font-size: 1.15rem;
+        margin-top: 2rem;
+      }
+    }
+
+    &-quote {
+      border-left: 4px solid #2563eb;
+      background: #f8fafc;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      font-style: italic;
+      font-size: 1.1rem;
+      border-radius: 0 8px 8px 0;
+
+      p {
+        margin: 0;
+      }
+    }
+
+    &-code {
+      background: #f3f4f6;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      color: #be185d;
+    }
+
+    &-pre {
+      background: #1f2937;
+      color: #f9fafb;
+      padding: 1.5rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 2rem 0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+
+      code {
+        background: none;
+        padding: 0;
+        color: inherit;
+      }
+    }
+
+    // Lists
+    ul, ol {
+      margin: 1.5rem 0;
+      padding-left: 2rem;
+
+      li {
+        margin: 0.5rem 0;
+        line-height: 1.6;
+      }
+    }
+
+    ul li {
+      list-style-type: disc;
+    }
+
+    // Links
+    a {
+      color: #2563eb;
+      text-decoration: underline;
+      font-weight: 500;
+
+      &:hover {
+        color: #1d4ed8;
+      }
+    }
+
+    // Images
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin: 2rem 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  &__footer {
+    padding: 2rem 3rem 3rem 3rem;
+    border-top: 1px solid #f3f4f6;
+
+    @media (max-width: 768px) {
+      padding: 1.5rem;
+    }
+  }
+
+  &__back-link {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border: 2px solid #2563eb;
+    border-radius: 50px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: #2563eb;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+    }
+  }
+}
+
+// Special styling for emoji sections
+.blog-post__content p:has(span:first-child) {
+  span:first-child {
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+  }
+}
